@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
         Empresa em = new Empresa("B123456","XYZYZ SA","T T","xyz@xyz.com");
         //boolean v = DB.empresaDao.nuevo(em);
+        //Empleado nu = DB.empleados.getEmpleadoUsuarioClave("","");
         ArrayList<Empresa> ae = (ArrayList<Empresa>) DB.empresas.getEmpresas();
         em = DB.empresas.ultimo();
 
@@ -59,5 +60,8 @@ public class MainActivity extends AppCompatActivity {
         for(String es : rol){
             Log.i("APPK", "R:: "+es);
         }
+
+        Fichaje ul = DB.fichar.getFichajeUltimo(tr.getId_empleado());
+        Log.i("APPK", ""+ul.toString());
     }
 }

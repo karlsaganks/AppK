@@ -61,6 +61,21 @@ public class FichajeDao extends CRUD implements IFichajeDao, IFichajeEsquema {
     }
 
     @Override
+    public Fichaje getFichajeUltimo(int id_empleado) {
+        final String argumentos[] = { String.valueOf(id_empleado)};
+        final String seleccion = F_COL_ID_EMPLEADO + " = ?";
+        String LIMITE = "1";
+        Fichaje f = null;
+        cursor = super.query(F_TABLA, F_COLUMNAS, seleccion, argumentos, F_COL_ID_FICHAJE + " DESC ", LIMITE);
+        if(cursor != null){
+            cursor.moveToFirst();
+            f = cursorATabla(cursor);
+        }
+        cursor.close();
+        return f;
+    }
+
+    @Override
     public boolean nuevo(Fichaje f) {
         setRegistro(f);
         try {
@@ -110,7 +125,7 @@ public class FichajeDao extends CRUD implements IFichajeDao, IFichajeEsquema {
         }
         if(cursor.getColumnIndex(F_COL_ID_EMPLEADO) != -1){
             id_empleadoIndex = cursor.getColumnIndexOrThrow(F_COL_ID_EMPLEADO);
-            f.setEmpleado(DB.empleadoDao.getEmpleadoId( cursor.getInt(id_empleadoIndex)));
+            f.setEmpleado(DB.empleados.getEmpleadoId( cursor.getInt(id_empleadoIndex)));
         }
         if(cursor.getColumnIndex(F_COL_INICIO) != -1){
             inicioIndex = cursor.getColumnIndexOrThrow(F_COL_INICIO);

@@ -223,7 +223,7 @@ public class EmpleadoDao extends CRUD implements IEmpleadoEsquema, IEmpleadoDao 
         }
        if(cursor.getColumnIndex(E_COL_ID_EMPRESA) != -1){
             id_empresaIndex = cursor.getColumnIndexOrThrow(E_COL_ID_EMPRESA);
-            e.setEmpresa( DB.empresaDao.getEmpresaId( cursor.getInt(id_empresaIndex)));
+            e.setEmpresa( DB.empresas.getEmpresaId( cursor.getInt(id_empresaIndex)));
         }
         return e;
     }
