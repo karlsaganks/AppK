@@ -19,9 +19,9 @@ public class DB {
     private DBH db;
     private static final int DBVERSION = 1;
     private final Context contexto ;
-    public static EmpresaDao empresaDao;
-    public static EmpleadoDao empleadoDao;
-    public static FichajeDao fichajeDao;
+    public static EmpresaDao empresas;
+    public static EmpleadoDao empleados;
+    public static FichajeDao fichar;
 
     public DB open() throws SQLException {
         return this;
@@ -35,9 +35,9 @@ public class DB {
         this.contexto = contexto;
         db = new DBH(contexto);
         SQLiteDatabase _bd = db.getWritableDatabase();
-        empresaDao = new EmpresaDao(_bd);
-        empleadoDao = new EmpleadoDao(_bd);
-        fichajeDao = new FichajeDao(_bd);
+        empresas = new EmpresaDao(_bd);
+        empleados = new EmpleadoDao(_bd);
+        fichar = new FichajeDao(_bd);
     }
 
     private static class DBH extends SQLiteOpenHelper {

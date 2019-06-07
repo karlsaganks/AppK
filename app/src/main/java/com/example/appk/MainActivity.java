@@ -25,41 +25,39 @@ public class MainActivity extends AppCompatActivity {
 
         bdd = new DB(this);
 
-        //   bdd.open();
         Empresa em = new Empresa("B123456","XYZYZ SA","T T","xyz@xyz.com");
         //boolean v = DB.empresaDao.nuevo(em);
-        ArrayList<Empresa> ae = (ArrayList<Empresa>) DB.empresaDao.getEmpresas();
-        //em = DB.empresaDao.ultimo();
+        ArrayList<Empresa> ae = (ArrayList<Empresa>) DB.empresas.getEmpresas();
+        em = DB.empresas.ultimo();
 
         Log.i("APPK", "u: "+ em);
 
         Empleado tr = new Empleado("JUAN YONG 2","JYON3","12345","B", false, em);
-        //boolean t = DB.empleadoDao.nuevo(tr);
-        ArrayList<Empleado> at = (ArrayList<Empleado>) DB.empleadoDao.getEmpleados();
+        boolean t = DB.empleados.nuevo(tr);
+        ArrayList<Empleado> at = (ArrayList<Empleado>) DB.empleados.getEmpleados();
 
-        tr = DB.empleadoDao.ultimo();
+        tr = DB.empleados.ultimo();
         Log.i("APPK", "E: "+tr);
         for(Empleado es : at){
             Log.i("APPK", "= "+es);
         }
-         at = (ArrayList<Empleado>) DB.empleadoDao.getEmpleados();
+         at = (ArrayList<Empleado>) DB.empleados.getEmpleados();
 
         Timestamp de = new Timestamp(new Date().getTime());
         Timestamp hasta = new Timestamp(new Date().getTime());
 
         Fichaje fe = new Fichaje(tr, de, hasta, "Mensaje");
         Log.i("APPK", "F: "+fe);
-        boolean d = DB.fichajeDao.nuevo(fe);
-        ArrayList<Fichaje> af = (ArrayList<Fichaje>) DB.fichajeDao.getFicheje(tr.getId_empleado());
+        boolean d = DB.fichar.nuevo(fe);
+        ArrayList<Fichaje> af = (ArrayList<Fichaje>) DB.fichar.getFicheje(tr.getId_empleado());
 
         for(Fichaje es : af){
             Log.i("APPK", "= "+es);
         }
 
-//        ArrayList<String> rol = (ArrayList<String>) DB.empleadoDao.getRoles();
- //       for(String es : rol){
-  //          Log.i("APPK", "R:: "+es);
-  //      }
-  //      bdd.close();
+        ArrayList<String> rol = (ArrayList<String>) DB.empleados.getRoles();
+        for(String es : rol){
+            Log.i("APPK", "R:: "+es);
+        }
     }
 }
