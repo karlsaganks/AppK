@@ -1,5 +1,6 @@
 package com.example.appk.controlador;
 
+import android.app.Application;
 import android.content.Context;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
@@ -13,12 +14,12 @@ import com.example.appk.i_esquema.IEmpleadoEsquema;
 import com.example.appk.i_esquema.IEmpresaEsquema;
 import com.example.appk.i_esquema.IFichajeEsquema;
 
-public class DB {
+public class DB extends Application {
     private static final String APP = "APPK";
     private static final String DBNAME = "DBControl.db";
     private DBH db;
     private static final int DBVERSION = 1;
-    private final Context contexto ;
+    private Context contexto ;
     public static EmpresaDao empresas;
     public static EmpleadoDao empleados;
     public static FichajeDao fichar;
@@ -31,8 +32,18 @@ public class DB {
         db.close();
     }
 
-    public DB(Context contexto){
-        this.contexto = contexto;
+//    public DB(Context contexto){
+//        this.contexto = contexto;
+//        db = new DBH(contexto);
+//        SQLiteDatabase _bd = db.getWritableDatabase();
+//        empresas = new EmpresaDao(_bd);
+//        empleados = new EmpleadoDao(_bd);
+//        fichar = new FichajeDao(_bd);
+//    }
+
+    public void onCreate() {
+        super.onCreate();
+        contexto = getApplicationContext();
         db = new DBH(contexto);
         SQLiteDatabase _bd = db.getWritableDatabase();
         empresas = new EmpresaDao(_bd);

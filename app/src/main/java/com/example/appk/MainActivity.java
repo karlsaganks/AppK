@@ -16,18 +16,18 @@ import java.util.Date;
 public class MainActivity extends AppCompatActivity {
 
 
-    private DB bdd;
+    //private DB bdd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        bdd = new DB(this);
+        //bdd = new DB(this);
 
         Empresa em = new Empresa("B123456","XYZYZ SA","T T","xyz@xyz.com");
-        //boolean v = DB.empresaDao.nuevo(em);
-        //Empleado nu = DB.empleados.getEmpleadoUsuarioClave("","");
+       // boolean v = DB.empresas.nuevo(em);
+        Empleado nu = DB.empleados.getEmpleadoUsuarioClave("","");
         ArrayList<Empresa> ae = (ArrayList<Empresa>) DB.empresas.getEmpresas();
         em = DB.empresas.ultimo();
 
