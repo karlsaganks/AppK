@@ -45,7 +45,7 @@ public class FichajeDao extends CRUD implements IFichajeDao, IFichajeEsquema {
     @Override
     public List<Fichaje> getFichaje(Timestamp desde, Timestamp hasta) {
         final String argumentos[] = { String.valueOf(desde), String.valueOf(hasta) };
-        final String seleccion = F_COL_INICIO + " >= ? AND " + F_COL_FIN + " <= ?";
+        final String seleccion = F_COL_INICIO + " >= ? AND " + F_COL_INICIO + " <= ?";
         List<Fichaje> fichajeLista = new ArrayList<Fichaje>();
         cursor = super.query(F_TABLA, F_COLUMNAS, seleccion, argumentos);
         if(cursor != null){
