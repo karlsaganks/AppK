@@ -102,6 +102,23 @@ public class EmpleadoDao extends CRUD implements IEmpleadoEsquema, IEmpleadoDao 
     }
 
     @Override
+    public List<Empleado> getRol(String rol) {
+        final String argumentos[] = { rol };
+        final String seleccion = E_COL_ROL + " = ? " ;
+        List<Empleado> e = new ArrayList<>();
+        cursor = super.query(E_TABLA, E_COLUMNAS, seleccion, argumentos);
+        if(cursor != null){
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()){
+                e.add( cursorATabla(cursor));
+                cursor.moveToNext();
+            }
+            cursor.close();
+        }
+        return e;
+    }
+
+    @Override
     public Empleado getEmpleadoUsuarioClave(String usuario, String clave) {
         final String argumentos[] = { usuario, clave };
         final String seleccion = E_COL_USUARIO + " = ? AND " + E_COL_CLAVE + " = ?";

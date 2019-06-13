@@ -18,7 +18,7 @@ public class DB extends Application {
     private static final String APP = "APPK";
     private static final String DBNAME = "DBControl.db";
     private DBH db;
-    private static final int DBVERSION = 1;
+    private static final int DBVERSION = 2;
     private Context contexto ;
     public static EmpresaDao empresas;
     public static EmpleadoDao empleados;

@@ -10,6 +10,7 @@ public interface IEmpleadoDao {
     public Empleado primero();
     public Empleado ultimo();
     public List<String> getRoles();
+    public List<Empleado> getRol(String rol);
     public Empleado getEmpleadoUsuarioClave(String usuario, String clave);
     public boolean nuevo(Empleado e);
     public boolean eliminar(int id_empleado);
