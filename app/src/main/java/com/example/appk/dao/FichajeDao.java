@@ -10,6 +10,7 @@ import com.example.appk.beans.Fichaje;
 import com.example.appk.controlador.DB;
 import com.example.appk.i_dao.IFichajeDao;
 import com.example.appk.i_esquema.IFichajeEsquema;
+import com.example.appk.util.Fecha;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -44,8 +45,30 @@ public class FichajeDao extends CRUD implements IFichajeDao, IFichajeEsquema {
 
     @Override
     public List<Fichaje> getFichaje(Timestamp desde, Timestamp hasta) {
-        final String argumentos[] = { String.valueOf(desde), String.valueOf(hasta) };
+        long de = Fecha.inicio(desde).getTime();
+        long al = Fecha.fin(hasta).getTime();
+        final String argumentos[] = { String.valueOf(de), String.valueOf(al) };
         final String seleccion = F_COL_INICIO + " >= ? AND " + F_COL_INICIO + " <= ?";
+        List<Fichaje> fichajeLista = new ArrayList<Fichaje>();
+        cursor = super.query(F_TABLA, F_COLUMNAS, seleccion, argumentos);
+        if(cursor != null){
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()){
+                Fichaje e = cursorATabla(cursor);
+                fichajeLista.add(e);
+                cursor.moveToNext();
+            }
+        }
+        cursor.close();
+        return fichajeLista;
+    }
+
+    @Override
+    public List<Fichaje> getFichaje(int id_empleado, Timestamp desde, Timestamp hasta) {
+        long de = Fecha.inicio(desde).getTime();
+        long al = Fecha.fin(hasta).getTime();
+        final String argumentos[] = { String.valueOf(id_empleado), String.valueOf(de), String.valueOf(al) };
+        final String seleccion = F_COL_ID_EMPLEADO + " = ? AND " + F_COL_INICIO + " >= ? AND " + F_COL_INICIO + " <= ?";
         List<Fichaje> fichajeLista = new ArrayList<Fichaje>();
         cursor = super.query(F_TABLA, F_COLUMNAS, seleccion, argumentos);
         if(cursor != null){

@@ -68,5 +68,10 @@ public class MainActivity extends AppCompatActivity {
         for(Empleado es : aee){
             Log.i("APPK", "Rol :: "+es);
         }
+
+        ArrayList<Fichaje> fee = (ArrayList<Fichaje>) DB.fichar.getFichaje(1, de, hasta);
+        for(Fichaje es : fee){
+            Log.i("APPK", "Fichaje :: "+es);
+        }
     }
 }
